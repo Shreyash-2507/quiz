@@ -3,253 +3,242 @@
 <head>
 <meta charset="UTF-8">
 <title>Quiz 😁</title>
+
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #ffeef5;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        overflow: hidden;
-    }
+body{
+    margin:0;
+    font-family: 'Arial', sans-serif;
+    background:#ffeef5;
+    overflow:hidden;
+}
 
-    .page {
-        display: none;
-        text-align: center;
-        width: 100%;
-        padding: 20px;
-    }
+.page{
+    display:none;
+    text-align:center;
+    padding:30px;
+    font-size:22px;
+}
 
-    .active {
-        display: block;
-    }
+.active{display:block;}
 
-    h1, h2 {
-        margin-bottom: 20px;
-    }
+h1{font-size:32px;}
+h2{font-size:28px;}
 
-    .options {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        max-width: 400px;
-        margin: auto;
-    }
+.options{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+    max-width:420px;
+    margin:30px auto;
+}
 
-    .box {
-        padding: 15px;
-        background: white;
-        border-radius: 12px;
-        cursor: pointer;
-        font-size: 18px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        transition: 0.2s;
-    }
+.box{
+    background:white;
+    padding:18px;
+    border-radius:15px;
+    cursor:pointer;
+    font-size:22px;
+    box-shadow:0 6px 12px rgba(0,0,0,0.15);
+    transition:0.2s;
+}
 
-    .box:hover {
-        transform: scale(1.05);
-    }
+.box:hover{transform:scale(1.07);}
 
-    .message {
-        margin-top: 15px;
-        font-size: 18px;
-    }
+.message{margin-top:20px;font-size:22px;}
 
-    .infinity {
-        font-size: 60px;
-        margin-bottom: 20px;
-    }
+.infinity{
+    font-size:70px;
+    animation:pulse 1.5s infinite;
+}
 
-    /* Hearts animation */
-    .heart {
-        position: fixed;
-        bottom: -20px;
-        font-size: 20px;
-        animation: float 5s linear infinite;
-        color: red;
-    }
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+    100%{transform:scale(1);}
+}
 
-    @keyframes float {
-        0% { transform: translateY(0); opacity: 1; }
-        100% { transform: translateY(-110vh); opacity: 0; }
-    }
+/* floating balloons + hearts */
+.float{
+    position:fixed;
+    bottom:-50px;
+    font-size:24px;
+    animation:floatUp linear infinite;
+    pointer-events:none;
+}
+
+@keyframes floatUp{
+    from{transform:translateY(0);opacity:1;}
+    to{transform:translateY(-120vh);opacity:0;}
+}
+
+.blue{
+    color:#0066ff;
+    font-weight:bold;
+}
 </style>
 </head>
+
 <body>
 
-<!-- Page 1 -->
 <div class="page active" id="p1">
-    <h1>Would you like to take a quiz 😁?</h1>
-    <div class="options">
-        <div class="box" onclick="goP2(false)">Yes</div>
-        <div class="box" onclick="goP2(true)">No</div>
-    </div>
+<h1>Would you like to take a quiz 😁?</h1>
+<div class="options">
+<div class="box" onclick="goP2(false)">Yes</div>
+<div class="box" onclick="goP2(true)">No</div>
+</div>
 </div>
 
-<!-- Page 2 -->
 <div class="page" id="p2">
-    <h1>Who do you like more??</h1>
-    <div class="options" id="likeOptions"></div>
-    <div class="message" id="likeMsg"></div>
+<h1>Who do you like more??</h1>
+<div class="options" id="likeOpt"></div>
+<div class="message" id="likeMsg"></div>
 </div>
 
-<!-- Page 3 -->
 <div class="page" id="p3">
-    <h1>Do you like chocolate 🍫??</h1>
-    <div class="options">
-        <div class="box" onclick="chocoNo()">No</div>
-        <div class="box" onclick="chocoYes()">Yes</div>
-    </div>
-    <div class="message" id="chocoMsg"></div>
+<h1>Do you like chocolate 🍫??</h1>
+<div class="options">
+<div class="box" onclick="chocoNo()">No</div>
+<div class="box" onclick="chocoYes()">Yes</div>
+</div>
+<div class="message" id="chocoMsg"></div>
 </div>
 
-<!-- Page 4 -->
 <div class="page" id="p4">
-    <h1 id="likeQ">What does Shreyash like??</h1>
-    <div class="options" id="foodOptions"></div>
+<h1>What does Shreyash like??</h1>
+<div class="options" id="foodOpt"></div>
 </div>
 
-<!-- Page 5 -->
 <div class="page" id="p5">
-    <h1>What does Shreyash love?</h1>
-    <div class="options" id="loveOptions"></div>
-    <div class="message" id="loveMsg"></div>
+<h1>What does Shreyash love?</h1>
+<div class="options" id="loveOpt"></div>
+<div class="message" id="techMsg"></div>
 </div>
 
-<!-- Page 6 -->
 <div class="page" id="p6">
-    <h1>Do you wanna know how much he loves you???</h1>
-    <div class="options">
-        <div class="box" onclick="finalPage()">Yes</div>
-        <div class="box" onclick="finalPage()">No</div>
-    </div>
+<div class="infinity">♾️</div>
+<h2>He wants to ask you something,<br>wanna know what it is??</h2>
+<div class="options">
+<div class="box" onclick="show('p7')">Yes</div>
+<div class="box" id="runNo1" onclick="runAway('runNo1')">No</div>
+</div>
 </div>
 
-<!-- Page 7 -->
 <div class="page" id="p7">
-    <div class="infinity">♾️</div>
-    <h1>Will you be his valentine?? 😁</h1>
-    <div class="options">
-        <div class="box" onclick="valentine(true)">Yes</div>
-        <div class="box" onclick="valentine(false)">No</div>
-    </div>
-    <div class="message" id="finalMsg"></div>
+<h1 class="blue">Will you be my valentine?</h1>
+<div class="options">
+<div class="box" onclick="finalLove()">Yes</div>
+<div class="box" id="runNo2" onclick="runAway('runNo2')">No</div>
+</div>
+</div>
+
+<div class="page" id="p8">
+<h1><b>I loveee youuu</b></h1>
+<h2>❤️❤️❤️❤️❤️❤️</h2>
 </div>
 
 <script>
-function show(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+function show(id){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById(id).classList.add('active');
 }
 
-function goP2(noChosen) {
-    show('p2');
-    if (noChosen) document.getElementById('likeMsg').innerText = "I wasn't asking 😃";
-    loadLikeOptions(false);
+function goP2(no){
+show('p2');
+if(no) likeMsg.innerText="I wasn't asking 😃";
+loadLikes(false);
 }
 
-function loadLikeOptions(allShreyash) {
-    const opts = document.getElementById('likeOptions');
-    opts.innerHTML = "";
-    let arr = allShreyash ?
-        ["Shreyash","Shreyash","Shreyash","Shreyash"] :
-        ["A. Raghu Dixit","B. Shreyash","C. Kim Jong Un","D. Michael Jackson"];
-
-    arr.forEach(t => {
-        let d = document.createElement('div');
-        d.className = "box";
-        d.innerText = t;
-        d.onclick = () => {
-            if (!allShreyash && t !== "B. Shreyash") {
-                document.getElementById('likeMsg').innerText = "Please choose again";
-                loadLikeOptions(true);
-            } else show('p3');
-        };
-        opts.appendChild(d);
-    });
+function loadLikes(all){
+likeOpt.innerHTML="";
+let arr=all?["Shreyash","Shreyash","Shreyash","Shreyash"]:
+["A. Raghu Dixit","B. Shreyash","C. Kim Jong Un","D. Michael Jackson"];
+arr.forEach(t=>{
+let d=document.createElement("div");
+d.className="box";
+d.innerText=t;
+d.onclick=()=>{
+if(!all && !t.includes("Shreyash")){
+likeMsg.innerText="Please choose again";
+loadLikes(true);
+}else show('p3');
+};
+likeOpt.appendChild(d);
+});
 }
 
-function chocoNo() {
-    document.getElementById('chocoMsg').innerText = "Ik, just asking";
-    setTimeout(() => show('p4'), 800);
+function chocoNo(){
+chocoMsg.innerText="Ik, just asking";
+setTimeout(()=>show('p4'),800);
+}
+function chocoYes(){
+chocoMsg.innerText="Please choose again";
 }
 
-function chocoYes() {
-    document.getElementById('chocoMsg').innerText = "Please choose again";
-}
-
-function loadFood(first=true) {
-    const f = document.getElementById('foodOptions');
-    f.innerHTML = "";
-    let arr = first ?
-        ["A. Chocolate","B. Chocolate","C. Chocolate","D. Something else ig"] :
-        ["A. McD","B. KFC","C. Taco Bell","D. Shiv Sagar"];
-
-    arr.forEach(t => {
-        let d = document.createElement('div');
-        d.className="box";
-        d.innerText=t;
-        d.onclick=()=>{
-            if (first && t.includes("Something")) loadFood(false);
-            else {
-                alert("Thank you for answering 🙂‍↕️");
-                show('p5');
-                loadLove();
-            }
-        };
-        f.appendChild(d);
-    });
+function loadFood(step=1){
+foodOpt.innerHTML="";
+let arr= step==1 ?
+["A. Chocolate","B. Chocolate","C. Chocolate","D. Something else ig"]:
+["A. McD","B. KFC","C. Taco Bell","D. Shiv Sagar"];
+arr.forEach(t=>{
+let d=document.createElement("div");
+d.className="box";
+d.innerText=t;
+d.onclick=()=>{
+alert("Thank you for answering 🙂‍↕️");
+show('p5');
+loadLove();
+};
+foodOpt.appendChild(d);
+});
 }
 loadFood();
 
-function loadLove() {
-    const l = document.getElementById('loveOptions');
-    l.innerHTML="";
-    ["Chocolate","Chocolate","Chocolate","Chocolate"].forEach(()=>{
-        let d=document.createElement('div');
-        d.className="box";
-        d.innerText="Chocolate";
-        d.onclick=()=>{
-            document.getElementById('loveMsg').innerText="Sorryy technical issues, please try again";
-            setTimeout(loadStuti,800);
-        };
-        l.appendChild(d);
-    });
+function loadLove(){
+loveOpt.innerHTML="";
+["Chocolate","Chocolate","Chocolate","Chocolate"].forEach(()=>{
+let d=document.createElement("div");
+d.className="box";
+d.innerText="Chocolate";
+d.onclick=()=>{
+techMsg.innerText="Sorry technical issues, please try again";
+setTimeout(loadStuti,1000);
+};
+loveOpt.appendChild(d);
+});
 }
 
-function loadStuti() {
-    const l = document.getElementById('loveOptions');
-    l.innerHTML="";
-    ["Stutiii","Stutiii","Stutiii","Stutiii"].forEach(()=>{
-        let d=document.createElement('div');
-        d.className="box";
-        d.innerText="Stutiii";
-        d.onclick=()=>show('p6');
-        l.appendChild(d);
-    });
+function loadStuti(){
+loveOpt.innerHTML="";
+["Stutiii","Stutiii","Stutiii","Stutiii"].forEach(()=>{
+let d=document.createElement("div");
+d.className="box";
+d.innerText="Stutiii";
+d.onclick=()=>show('p6');
+loveOpt.appendChild(d);
+});
 }
 
-function finalPage() { show('p7'); }
-
-function valentine(yes) {
-    document.getElementById('finalMsg').innerText =
-        yes ? "I lovee youu ❤️" : "I lovee youu ❤️\nWasn't asking actually 😃";
-    hearts();
+let comments=["Nice try 😏","Almost 😌","Not happening 😁","Try again 😂"];
+function runAway(id){
+let btn=document.getElementById(id);
+btn.style.position="absolute";
+btn.style.left=Math.random()*80+"%";
+btn.style.top=Math.random()*80+"%";
+alert(comments[Math.floor(Math.random()*comments.length)]);
 }
 
-function hearts() {
-    for (let i=0;i<30;i++) {
-        let h=document.createElement('div');
-        h.className="heart";
-        h.innerText="❤️";
-        h.style.left=Math.random()*100+"vw";
-        h.style.animationDuration=3+Math.random()*3+"s";
-        document.body.appendChild(h);
-        setTimeout(()=>h.remove(),6000);
-    }
-}
+function finalLove(){ show('p8'); }
+
+/* background balloons */
+setInterval(()=>{
+let b=document.createElement("div");
+b.className="float";
+b.innerText=Math.random()>0.5?"🎈":"❤️";
+b.style.left=Math.random()*100+"vw";
+b.style.animationDuration=4+Math.random()*4+"s";
+document.body.appendChild(b);
+setTimeout(()=>b.remove(),8000);
+},500);
 </script>
 
 </body>
