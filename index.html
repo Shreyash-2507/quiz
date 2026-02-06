@@ -15,20 +15,21 @@ body{
 }
 
 .page{
-    display:none;
+    display:none; /* 🔥 IMPORTANT FIX */
     height:100vh;
     width:100vw;
-    display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     text-align:center;
 }
 
-.active{display:flex;}
+.page.active{
+    display:flex;
+}
 
 h1{
-    font-size:44px;
+    font-size:46px;
     font-weight:800;
     margin-bottom:25px;
 }
@@ -47,18 +48,20 @@ h2{
 .box{
     background:white;
     padding:25px 40px;
-    border-radius:22px;
+    border-radius:24px;
     font-size:30px;
     font-weight:800;
     cursor:pointer;
-    box-shadow:0 8px 18px rgba(0,0,0,0.2);
+    box-shadow:0 8px 18px rgba(0,0,0,0.25);
 }
 
-.blue{color:#0077ff;}
+.blue{
+    color:#0066ff;
+}
 
 .infinity{
-    font-size:110px;
-    animation:pulse 1.3s infinite;
+    font-size:120px;
+    animation:pulse 1.4s infinite;
 }
 
 @keyframes pulse{
@@ -67,13 +70,13 @@ h2{
 
 .float{
     position:fixed;
-    bottom:-120px;
-    font-size:80px;
+    bottom:-150px;
+    font-size:90px;
     animation:floatUp linear infinite;
 }
 
 @keyframes floatUp{
-    to{transform:translateY(-140vh);opacity:0;}
+    to{transform:translateY(-150vh);opacity:0;}
 }
 </style>
 </head>
@@ -82,7 +85,7 @@ h2{
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
-<h1>Would you like to take a quiz? 😁</h1>
+<h1>Would you like to take a quiz 😁?</h1>
 <div class="options">
 <div class="box" onclick="show('p2')">Yes</div>
 <div class="box" onclick="runAway(this)">No</div>
@@ -101,7 +104,7 @@ h2{
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
-<h1>Do you like chocolate? 🍫</h1>
+<h1>Do you like chocolate 🍫?</h1>
 <div class="options">
 <div class="box" onclick="chocoYes()">Yes</div>
 <div class="box" onclick="chocoNo()">No</div>
@@ -114,7 +117,7 @@ h2{
 <h1>What does Shreyash like?</h1>
 <div class="options">
 <div class="box" onclick="show('p5')">Chocolate</div>
-<div class="box" onclick="runAway(this)">Anything else</div>
+<div class="box" onclick="runAway(this)">Something else ig</div>
 </div>
 </div>
 
@@ -173,7 +176,7 @@ setTimeout(()=>show('p4'),600);
 
 function techIssue(){
 document.getElementById("techMsg").innerText="Sorry technical issues, please try again";
-setTimeout(()=>show('p6'),900);
+setTimeout(()=>show('p6'),800);
 }
 
 let msgs=["Nope 😏","Nice try 😂","Almost 😌","Not allowed 😁"];
@@ -192,7 +195,7 @@ f.style.left=Math.random()*100+"vw";
 f.style.animationDuration=5+Math.random()*4+"s";
 document.body.appendChild(f);
 setTimeout(()=>f.remove(),10000);
-},300);
+},250);
 </script>
 
 </body>
