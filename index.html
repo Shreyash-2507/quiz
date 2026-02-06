@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Quiz 😁</title>
+<title>Quiz 💖</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
 
 <style>
 body{
     margin:0;
-    font-family:'Poppins',sans-serif;
-    background:#ffeef5;
+    font-family:'Baloo 2', cursive;
+    background:#ffe6f0;
     overflow:hidden;
 }
 
@@ -27,45 +27,48 @@ body{
 
 .active{display:flex;}
 
-h1{font-size:42px;font-weight:800;margin-bottom:20px;}
-h2{font-size:32px;font-weight:700;}
+h1{
+    font-size:44px;
+    font-weight:800;
+    margin-bottom:25px;
+}
+
+h2{
+    font-size:34px;
+    font-weight:700;
+}
 
 .options{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:25px;
-    max-width:500px;
-    width:100%;
+    display:flex;
+    gap:30px;
     margin-top:25px;
 }
 
 .box{
     background:white;
-    padding:24px;
-    border-radius:20px;
-    font-size:28px;
-    font-weight:700;
+    padding:25px 40px;
+    border-radius:22px;
+    font-size:30px;
+    font-weight:800;
     cursor:pointer;
     box-shadow:0 8px 18px rgba(0,0,0,0.2);
 }
 
-.message{margin-top:20px;font-size:28px;}
+.blue{color:#0077ff;}
 
 .infinity{
-    font-size:100px;
-    animation:pulse 1.4s infinite;
+    font-size:110px;
+    animation:pulse 1.3s infinite;
 }
 
 @keyframes pulse{
-    50%{transform:scale(1.25);}
+    50%{transform:scale(1.3);}
 }
-
-.blue{color:#0066ff;font-weight:800;}
 
 .float{
     position:fixed;
     bottom:-120px;
-    font-size:70px;
+    font-size:80px;
     animation:floatUp linear infinite;
 }
 
@@ -79,41 +82,49 @@ h2{font-size:32px;font-weight:700;}
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
-<h1>Would you like to take a quiz 😁?</h1>
+<h1>Would you like to take a quiz? 😁</h1>
 <div class="options">
-<div class="box" onclick="show('p2'); loadLikes()">Yes</div>
+<div class="box" onclick="show('p2')">Yes</div>
 <div class="box" onclick="runAway(this)">No</div>
 </div>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
-<h1>Who do you like more??</h1>
-<div class="options" id="likeOpt"></div>
-<div class="message" id="likeMsg"></div>
+<h1>Who do you like more?</h1>
+<div class="options">
+<div class="box" onclick="wrongLike()">A. Raghu Dixit</div>
+<div class="box" onclick="show('p3')">B. Shreyash</div>
+</div>
+<p id="likeMsg"></p>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
-<h1>Do you like chocolate 🍫??</h1>
+<h1>Do you like chocolate? 🍫</h1>
 <div class="options">
 <div class="box" onclick="chocoYes()">Yes</div>
 <div class="box" onclick="chocoNo()">No</div>
 </div>
-<div class="message" id="chocoMsg"></div>
+<p id="chocoMsg"></p>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
-<h1>What does Shreyash like??</h1>
-<div class="options" id="foodOpt"></div>
+<h1>What does Shreyash like?</h1>
+<div class="options">
+<div class="box" onclick="show('p5')">Chocolate</div>
+<div class="box" onclick="runAway(this)">Anything else</div>
+</div>
 </div>
 
 <!-- PAGE 5 -->
 <div class="page" id="p5">
 <h1>What does Shreyash love?</h1>
-<div class="options" id="loveOpt"></div>
-<div class="message" id="techMsg"></div>
+<div class="options">
+<div class="box" onclick="techIssue()">Chocolate</div>
+</div>
+<p id="techMsg"></p>
 </div>
 
 <!-- PAGE 6 -->
@@ -128,7 +139,7 @@ h2{font-size:32px;font-weight:700;}
 
 <!-- PAGE 7 -->
 <div class="page" id="p7">
-<h1 class="blue">Will you be my valentine?</h1>
+<h1 class="blue"><b>Will you be my valentine?</b></h1>
 <div class="options">
 <div class="box" onclick="show('p8')">Yes</div>
 <div class="box" onclick="runAway(this)">No</div>
@@ -147,80 +158,25 @@ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 }
 
-function loadLikes(){
-likeOpt.innerHTML="";
-["A. Raghu Dixit","B. Shreyash","C. Kim Jong Un","D. Michael Jackson"].forEach(t=>{
-let d=document.createElement("div");
-d.className="box";
-d.innerText=t;
-d.onclick=()=>{
-if(!t.includes("Shreyash")){
-likeMsg.innerText="Please choose again";
-likeOpt.innerHTML="";
-["Shreyash","Shreyash","Shreyash","Shreyash"].forEach(s=>{
-let x=document.createElement("div");
-x.className="box";
-x.innerText=s;
-x.onclick=()=>show('p3');
-likeOpt.appendChild(x);
-});
-}else show('p3');
-};
-likeOpt.appendChild(d);
-});
+function wrongLike(){
+document.getElementById("likeMsg").innerText="Please choose again 😌";
 }
 
 function chocoYes(){
-chocoMsg.innerText="Please choose again";
+document.getElementById("chocoMsg").innerText="Huhu";
 }
 
 function chocoNo(){
-chocoMsg.innerText="Huhu";
+document.getElementById("chocoMsg").innerText="Okayyy 😁";
 setTimeout(()=>show('p4'),600);
 }
 
-function loadFood(){
-foodOpt.innerHTML="";
-["A. Chocolate","B. Chocolate","C. Chocolate","D. Something else ig"].forEach(t=>{
-let d=document.createElement("div");
-d.className="box";
-d.innerText=t;
-d.onclick=()=>{
-alert("Thank you for answering 🙂‍↕️");
-show('p5');
-loadLove();
-};
-foodOpt.appendChild(d);
-});
-}
-loadFood();
-
-function loadLove(){
-loveOpt.innerHTML="";
-["Chocolate","Chocolate","Chocolate","Chocolate"].forEach(()=>{
-let d=document.createElement("div");
-d.className="box";
-d.innerText="Chocolate";
-d.onclick=()=>{
-techMsg.innerText="Sorry technical issues, please try again";
-setTimeout(loadStuti,800);
-};
-loveOpt.appendChild(d);
-});
+function techIssue(){
+document.getElementById("techMsg").innerText="Sorry technical issues, please try again";
+setTimeout(()=>show('p6'),900);
 }
 
-function loadStuti(){
-loveOpt.innerHTML="";
-["Stutiii","Stutiii","Stutiii","Stutiii"].forEach(()=>{
-let d=document.createElement("div");
-d.className="box";
-d.innerText="Stutiii";
-d.onclick=()=>show('p6');
-loveOpt.appendChild(d);
-});
-}
-
-let msgs=["Nice try 😏","Nope 😁","Almost 😂","Not allowed 😌"];
+let msgs=["Nope 😏","Nice try 😂","Almost 😌","Not allowed 😁"];
 function runAway(btn){
 btn.style.position="absolute";
 btn.style.left=Math.random()*80+"%";
@@ -229,14 +185,14 @@ alert(msgs[Math.floor(Math.random()*msgs.length)]);
 }
 
 setInterval(()=>{
-let b=document.createElement("div");
-b.className="float";
-b.innerText=Math.random()>0.5?"🎈":"❤️";
-b.style.left=Math.random()*100+"vw";
-b.style.animationDuration=5+Math.random()*4+"s";
-document.body.appendChild(b);
-setTimeout(()=>b.remove(),10000);
-},350);
+let f=document.createElement("div");
+f.className="float";
+f.innerText=Math.random()>0.5?"🎈":"❤️";
+f.style.left=Math.random()*100+"vw";
+f.style.animationDuration=5+Math.random()*4+"s";
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),10000);
+},300);
 </script>
 
 </body>
