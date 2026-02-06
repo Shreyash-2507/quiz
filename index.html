@@ -7,7 +7,7 @@
 <style>
 body{
     margin:0;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     background:#ffeef5;
     overflow:hidden;
 }
@@ -22,7 +22,7 @@ body{
 .active{display:block;}
 
 h1{font-size:32px;}
-h2{font-size:28px;}
+h2{font-size:26px;}
 
 .options{
     display:grid;
@@ -44,7 +44,7 @@ h2{font-size:28px;}
 
 .box:hover{transform:scale(1.07);}
 
-.message{margin-top:20px;font-size:22px;}
+.message{margin-top:20px;}
 
 .infinity{
     font-size:70px;
@@ -57,7 +57,12 @@ h2{font-size:28px;}
     100%{transform:scale(1);}
 }
 
-/* floating balloons + hearts */
+.blue{
+    color:#0066ff;
+    font-weight:bold;
+}
+
+/* balloons + hearts */
 .float{
     position:fixed;
     bottom:-50px;
@@ -70,11 +75,6 @@ h2{font-size:28px;}
     from{transform:translateY(0);opacity:1;}
     to{transform:translateY(-120vh);opacity:0;}
 }
-
-.blue{
-    color:#0066ff;
-    font-weight:bold;
-}
 </style>
 </head>
 
@@ -83,8 +83,8 @@ h2{font-size:28px;}
 <div class="page active" id="p1">
 <h1>Would you like to take a quiz 😁?</h1>
 <div class="options">
-<div class="box" onclick="goP2(false)">Yes</div>
-<div class="box" onclick="goP2(true)">No</div>
+<div class="box" onclick="goP2()">Yes</div>
+<div class="box noBtn" onclick="runAway(this)">No</div>
 </div>
 </div>
 
@@ -97,8 +97,8 @@ h2{font-size:28px;}
 <div class="page" id="p3">
 <h1>Do you like chocolate 🍫??</h1>
 <div class="options">
-<div class="box" onclick="chocoNo()">No</div>
 <div class="box" onclick="chocoYes()">Yes</div>
+<div class="box noBtn" onclick="runAway(this)">No</div>
 </div>
 <div class="message" id="chocoMsg"></div>
 </div>
@@ -119,15 +119,15 @@ h2{font-size:28px;}
 <h2>He wants to ask you something,<br>wanna know what it is??</h2>
 <div class="options">
 <div class="box" onclick="show('p7')">Yes</div>
-<div class="box" id="runNo1" onclick="runAway('runNo1')">No</div>
+<div class="box noBtn" onclick="runAway(this)">No</div>
 </div>
 </div>
 
 <div class="page" id="p7">
 <h1 class="blue">Will you be my valentine?</h1>
 <div class="options">
-<div class="box" onclick="finalLove()">Yes</div>
-<div class="box" id="runNo2" onclick="runAway('runNo2')">No</div>
+<div class="box" onclick="show('p8')">Yes</div>
+<div class="box noBtn" onclick="runAway(this)">No</div>
 </div>
 </div>
 
@@ -142,9 +142,8 @@ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 }
 
-function goP2(no){
+function goP2(){
 show('p2');
-if(no) likeMsg.innerText="I wasn't asking 😃";
 loadLikes(false);
 }
 
@@ -152,6 +151,7 @@ function loadLikes(all){
 likeOpt.innerHTML="";
 let arr=all?["Shreyash","Shreyash","Shreyash","Shreyash"]:
 ["A. Raghu Dixit","B. Shreyash","C. Kim Jong Un","D. Michael Jackson"];
+
 arr.forEach(t=>{
 let d=document.createElement("div");
 d.className="box";
@@ -166,20 +166,14 @@ likeOpt.appendChild(d);
 });
 }
 
-function chocoNo(){
-chocoMsg.innerText="Ik, just asking";
-setTimeout(()=>show('p4'),800);
-}
 function chocoYes(){
 chocoMsg.innerText="Please choose again";
 }
 
-function loadFood(step=1){
+function loadFood(){
 foodOpt.innerHTML="";
-let arr= step==1 ?
-["A. Chocolate","B. Chocolate","C. Chocolate","D. Something else ig"]:
-["A. McD","B. KFC","C. Taco Bell","D. Shiv Sagar"];
-arr.forEach(t=>{
+["A. Chocolate","B. Chocolate","C. Chocolate","D. Something else ig"]
+.forEach(t=>{
 let d=document.createElement("div");
 d.className="box";
 d.innerText=t;
@@ -218,16 +212,13 @@ loveOpt.appendChild(d);
 });
 }
 
-let comments=["Nice try 😏","Almost 😌","Not happening 😁","Try again 😂"];
-function runAway(id){
-let btn=document.getElementById(id);
+let comments=["Nice try 😏","Nope 😁","Almost 😂","Not allowed 😌"];
+function runAway(btn){
 btn.style.position="absolute";
 btn.style.left=Math.random()*80+"%";
 btn.style.top=Math.random()*80+"%";
 alert(comments[Math.floor(Math.random()*comments.length)]);
 }
-
-function finalLove(){ show('p8'); }
 
 /* background balloons */
 setInterval(()=>{
