@@ -4,69 +4,66 @@
 <meta charset="UTF-8">
 <title>Quiz 😁</title>
 
+<!-- Cute font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
 <style>
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
 body{
     margin:0;
-    font-family:'Segoe UI', Arial, sans-serif;
+    font-family:'Poppins', sans-serif;
     background:#ffeef5;
     overflow:hidden;
 }
 
-/* Center everything */
+/* Center content properly */
 .page{
     display:none;
     height:100vh;
     width:100vw;
-    text-align:center;
-    padding:30px;
-    font-size:28px;
-    font-weight:700;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
+    text-align:center;
+    padding:30px;
 }
 
 .active{display:flex;}
 
 h1{
     font-size:42px;
-    font-weight:900;
+    font-weight:800;
     margin-bottom:25px;
 }
 
 h2{
-    font-size:34px;
-    font-weight:800;
+    font-size:32px;
+    font-weight:700;
 }
 
 .options{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:25px;
-    max-width:480px;
+    max-width:500px;
     width:100%;
     margin-top:30px;
 }
 
 .box{
     background:white;
-    padding:22px;
-    border-radius:18px;
+    padding:24px;
+    border-radius:20px;
     cursor:pointer;
     font-size:28px;
-    font-weight:800;
-    box-shadow:0 8px 18px rgba(0,0,0,0.2);
+    font-weight:700;
+    box-shadow:0 8px 20px rgba(0,0,0,0.18);
     transition:0.25s;
 }
 
-.box:hover{
-    transform:scale(1.08);
-}
+.box:hover{transform:scale(1.08);}
 
 .message{
     margin-top:25px;
@@ -76,9 +73,9 @@ h2{
 
 /* Infinity animation */
 .infinity{
-    font-size:90px;
+    font-size:95px;
     animation:pulse 1.4s infinite;
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 
 @keyframes pulse{
@@ -89,21 +86,21 @@ h2{
 
 .blue{
     color:#0066ff;
-    font-weight:900;
+    font-weight:800;
 }
 
-/* Floating balloons & hearts */
+/* Big balloons & hearts */
 .float{
     position:fixed;
-    bottom:-80px;
-    font-size:48px; /* BIGGER */
+    bottom:-120px;
+    font-size:64px; /* BIG */
     animation:floatUp linear infinite;
     pointer-events:none;
 }
 
 @keyframes floatUp{
     from{transform:translateY(0);opacity:1;}
-    to{transform:translateY(-130vh);opacity:0;}
+    to{transform:translateY(-140vh);opacity:0;}
 }
 </style>
 </head>
@@ -128,7 +125,7 @@ h2{
 <h1>Do you like chocolate 🍫??</h1>
 <div class="options">
 <div class="box" onclick="chocoYes()">Yes</div>
-<div class="box" onclick="runAway(this)">No</div>
+<div class="box" onclick="chocoNo()">No</div>
 </div>
 <div class="message" id="chocoMsg"></div>
 </div>
@@ -201,6 +198,11 @@ function chocoYes(){
 chocoMsg.innerText="Please choose again";
 }
 
+function chocoNo(){
+chocoMsg.innerText="Huhu";
+setTimeout(()=>show('p4'),700);
+}
+
 function loadFood(){
 foodOpt.innerHTML="";
 ["A. Chocolate","B. Chocolate","C. Chocolate","D. Something else ig"]
@@ -251,16 +253,16 @@ btn.style.top=Math.random()*80+"%";
 alert(comments[Math.floor(Math.random()*comments.length)]);
 }
 
-/* Background balloons & hearts */
+/* Floating hearts & balloons */
 setInterval(()=>{
 let b=document.createElement("div");
 b.className="float";
 b.innerText=Math.random()>0.5?"🎈":"❤️";
 b.style.left=Math.random()*100+"vw";
-b.style.animationDuration=4+Math.random()*4+"s";
+b.style.animationDuration=5+Math.random()*4+"s";
 document.body.appendChild(b);
-setTimeout(()=>b.remove(),9000);
-},400);
+setTimeout(()=>b.remove(),10000);
+},350);
 </script>
 
 </body>
