@@ -7,11 +7,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;}
-
 body{
     margin:0;
-    font-family:'Poppins', sans-serif;
+    font-family:'Poppins',sans-serif;
     background:#ffeef5;
     overflow:hidden;
 }
@@ -25,12 +23,11 @@ body{
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:30px;
 }
 
 .active{display:flex;}
 
-h1{font-size:42px;font-weight:800;margin-bottom:25px;}
+h1{font-size:42px;font-weight:800;margin-bottom:20px;}
 h2{font-size:32px;font-weight:700;}
 
 .options{
@@ -39,34 +36,28 @@ h2{font-size:32px;font-weight:700;}
     gap:25px;
     max-width:500px;
     width:100%;
-    margin-top:30px;
+    margin-top:25px;
 }
 
 .box{
     background:white;
     padding:24px;
     border-radius:20px;
-    cursor:pointer;
     font-size:28px;
     font-weight:700;
-    box-shadow:0 8px 20px rgba(0,0,0,0.18);
-    transition:0.25s;
+    cursor:pointer;
+    box-shadow:0 8px 18px rgba(0,0,0,0.2);
 }
 
-.box:hover{transform:scale(1.08);}
-
-.message{margin-top:25px;font-size:28px;font-weight:700;}
+.message{margin-top:20px;font-size:28px;}
 
 .infinity{
-    font-size:95px;
+    font-size:100px;
     animation:pulse 1.4s infinite;
-    margin-bottom:20px;
 }
 
 @keyframes pulse{
-    0%{transform:scale(1);}
     50%{transform:scale(1.25);}
-    100%{transform:scale(1);}
 }
 
 .blue{color:#0066ff;font-weight:800;}
@@ -74,13 +65,11 @@ h2{font-size:32px;font-weight:700;}
 .float{
     position:fixed;
     bottom:-120px;
-    font-size:64px;
+    font-size:70px;
     animation:floatUp linear infinite;
-    pointer-events:none;
 }
 
 @keyframes floatUp{
-    from{transform:translateY(0);opacity:1;}
     to{transform:translateY(-140vh);opacity:0;}
 }
 </style>
@@ -88,20 +77,23 @@ h2{font-size:32px;font-weight:700;}
 
 <body>
 
+<!-- PAGE 1 -->
 <div class="page active" id="p1">
 <h1>Would you like to take a quiz 😁?</h1>
 <div class="options">
-<div class="box" onclick="show('p2'); loadLikes(false)">Yes</div>
+<div class="box" onclick="show('p2'); loadLikes()">Yes</div>
 <div class="box" onclick="runAway(this)">No</div>
 </div>
 </div>
 
+<!-- PAGE 2 -->
 <div class="page" id="p2">
 <h1>Who do you like more??</h1>
 <div class="options" id="likeOpt"></div>
 <div class="message" id="likeMsg"></div>
 </div>
 
+<!-- PAGE 3 -->
 <div class="page" id="p3">
 <h1>Do you like chocolate 🍫??</h1>
 <div class="options">
@@ -111,17 +103,20 @@ h2{font-size:32px;font-weight:700;}
 <div class="message" id="chocoMsg"></div>
 </div>
 
+<!-- PAGE 4 -->
 <div class="page" id="p4">
 <h1>What does Shreyash like??</h1>
 <div class="options" id="foodOpt"></div>
 </div>
 
+<!-- PAGE 5 -->
 <div class="page" id="p5">
 <h1>What does Shreyash love?</h1>
 <div class="options" id="loveOpt"></div>
 <div class="message" id="techMsg"></div>
 </div>
 
+<!-- PAGE 6 -->
 <div class="page" id="p6">
 <div class="infinity">♾️</div>
 <h2>He wants to ask you something,<br>wanna know what it is??</h2>
@@ -131,6 +126,7 @@ h2{font-size:32px;font-weight:700;}
 </div>
 </div>
 
+<!-- PAGE 7 -->
 <div class="page" id="p7">
 <h1 class="blue">Will you be my valentine?</h1>
 <div class="options">
@@ -139,6 +135,7 @@ h2{font-size:32px;font-weight:700;}
 </div>
 </div>
 
+<!-- PAGE 8 -->
 <div class="page" id="p8">
 <h1><b>I loveee youuu</b></h1>
 <h2>❤️❤️❤️❤️❤️❤️</h2>
@@ -150,20 +147,23 @@ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 }
 
-function loadLikes(all){
+function loadLikes(){
 likeOpt.innerHTML="";
-let arr = all ?
-["Shreyash","Shreyash","Shreyash","Shreyash"] :
-["A. Raghu Dixit","B. Shreyash","C. Kim Jong Un","D. Michael Jackson"];
-
-arr.forEach(t=>{
+["A. Raghu Dixit","B. Shreyash","C. Kim Jong Un","D. Michael Jackson"].forEach(t=>{
 let d=document.createElement("div");
 d.className="box";
 d.innerText=t;
 d.onclick=()=>{
-if(!all && !t.includes("Shreyash")){
+if(!t.includes("Shreyash")){
 likeMsg.innerText="Please choose again";
-loadLikes(true);
+likeOpt.innerHTML="";
+["Shreyash","Shreyash","Shreyash","Shreyash"].forEach(s=>{
+let x=document.createElement("div");
+x.className="box";
+x.innerText=s;
+x.onclick=()=>show('p3');
+likeOpt.appendChild(x);
+});
 }else show('p3');
 };
 likeOpt.appendChild(d);
@@ -176,13 +176,12 @@ chocoMsg.innerText="Please choose again";
 
 function chocoNo(){
 chocoMsg.innerText="Huhu";
-setTimeout(()=>show('p4'),700);
+setTimeout(()=>show('p4'),600);
 }
 
 function loadFood(){
 foodOpt.innerHTML="";
-["A. Chocolate","B. Chocolate","C. Chocolate","D. Something else ig"]
-.forEach(t=>{
+["A. Chocolate","B. Chocolate","C. Chocolate","D. Something else ig"].forEach(t=>{
 let d=document.createElement("div");
 d.className="box";
 d.innerText=t;
@@ -204,7 +203,7 @@ d.className="box";
 d.innerText="Chocolate";
 d.onclick=()=>{
 techMsg.innerText="Sorry technical issues, please try again";
-setTimeout(loadStuti,1000);
+setTimeout(loadStuti,800);
 };
 loveOpt.appendChild(d);
 });
@@ -221,15 +220,14 @@ loveOpt.appendChild(d);
 });
 }
 
-let comments=["Nice try 😏","Nope 😁","Almost 😂","Not allowed 😌"];
+let msgs=["Nice try 😏","Nope 😁","Almost 😂","Not allowed 😌"];
 function runAway(btn){
 btn.style.position="absolute";
 btn.style.left=Math.random()*80+"%";
 btn.style.top=Math.random()*80+"%";
-alert(comments[Math.floor(Math.random()*comments.length)]);
+alert(msgs[Math.floor(Math.random()*msgs.length)]);
 }
 
-/* Floating background */
 setInterval(()=>{
 let b=document.createElement("div");
 b.className="float";
