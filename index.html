@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Quiz 😁</title>
 
-<!-- Cute font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
 <style>
@@ -17,7 +16,6 @@ body{
     overflow:hidden;
 }
 
-/* Center content properly */
 .page{
     display:none;
     height:100vh;
@@ -32,16 +30,8 @@ body{
 
 .active{display:flex;}
 
-h1{
-    font-size:42px;
-    font-weight:800;
-    margin-bottom:25px;
-}
-
-h2{
-    font-size:32px;
-    font-weight:700;
-}
+h1{font-size:42px;font-weight:800;margin-bottom:25px;}
+h2{font-size:32px;font-weight:700;}
 
 .options{
     display:grid;
@@ -65,13 +55,8 @@ h2{
 
 .box:hover{transform:scale(1.08);}
 
-.message{
-    margin-top:25px;
-    font-size:28px;
-    font-weight:700;
-}
+.message{margin-top:25px;font-size:28px;font-weight:700;}
 
-/* Infinity animation */
 .infinity{
     font-size:95px;
     animation:pulse 1.4s infinite;
@@ -84,16 +69,12 @@ h2{
     100%{transform:scale(1);}
 }
 
-.blue{
-    color:#0066ff;
-    font-weight:800;
-}
+.blue{color:#0066ff;font-weight:800;}
 
-/* Big balloons & hearts */
 .float{
     position:fixed;
     bottom:-120px;
-    font-size:64px; /* BIG */
+    font-size:64px;
     animation:floatUp linear infinite;
     pointer-events:none;
 }
@@ -110,7 +91,7 @@ h2{
 <div class="page active" id="p1">
 <h1>Would you like to take a quiz 😁?</h1>
 <div class="options">
-<div class="box" onclick="goP2()">Yes</div>
+<div class="box" onclick="show('p2'); loadLikes(false)">Yes</div>
 <div class="box" onclick="runAway(this)">No</div>
 </div>
 </div>
@@ -169,15 +150,10 @@ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 }
 
-function goP2(){
-show('p2');
-loadLikes(false);
-}
-
 function loadLikes(all){
 likeOpt.innerHTML="";
-let arr=all?
-["Shreyash","Shreyash","Shreyash","Shreyash"]:
+let arr = all ?
+["Shreyash","Shreyash","Shreyash","Shreyash"] :
 ["A. Raghu Dixit","B. Shreyash","C. Kim Jong Un","D. Michael Jackson"];
 
 arr.forEach(t=>{
@@ -253,7 +229,7 @@ btn.style.top=Math.random()*80+"%";
 alert(comments[Math.floor(Math.random()*comments.length)]);
 }
 
-/* Floating hearts & balloons */
+/* Floating background */
 setInterval(()=>{
 let b=document.createElement("div");
 b.className="float";
